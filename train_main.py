@@ -20,10 +20,6 @@ from absl import flags
 
 from curl import training
 
-flags.DEFINE_enum('dataset', 'mnist', ['mnist', 'omniglot'], 'Dataset.')
-
-FLAGS = flags.FLAGS
-
 
 def main(unused_argv):
   training.run_training(
