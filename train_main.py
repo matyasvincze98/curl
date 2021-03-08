@@ -49,10 +49,10 @@ def main(unused_argv):
           'dec_up_strides': None,
       },
       n_z=32,
-      dynamic_expansion=True,
+      dynamic_expansion=False,
       ll_thresh=-200.0,
       classify_with_samples=False,
-      gen_replay_type='fixed',
+      gen_replay_type=None,
       use_supervised_replay=False,
       )
 
