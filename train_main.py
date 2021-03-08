@@ -18,7 +18,7 @@ reproduced by dividing this value by 10.
 from absl import app
 from absl import flags
 
-from curl import training
+import training
 
 
 def main(unused_argv):
