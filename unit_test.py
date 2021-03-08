@@ -21,7 +21,7 @@ from __future__ import print_function
 
 from absl.testing import absltest
 
-from curl import training
+import training
 
 
 class TrainingTest(absltest.TestCase):
