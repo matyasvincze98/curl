@@ -2,10 +2,6 @@
 
 from absl import logging
 import sonnet as snt
-
-import logging
-logging.getLogger("tensorflow").setLevel(logging.WARNING)
-
 import tensorflow as tf
 
 tfc = tf.compat.v1
