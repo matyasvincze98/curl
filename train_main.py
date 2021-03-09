@@ -20,6 +20,9 @@ from absl import flags
 
 import training
 
+import logging
+logging.getLogger("tensorflow").setLevel(logging.WARNING)
+
 
 def main(unused_argv):
   training.run_training(
