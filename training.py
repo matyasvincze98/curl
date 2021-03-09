@@ -8,10 +8,8 @@ import numpy as np
 from sklearn import neighbors
 import sonnet as snt
 
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import logging
-tf.get_logger().setLevel(logging.ERROR)
+logging.getLogger("tensorflow").setLevel(logging.WARNING)
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
