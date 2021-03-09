@@ -15,13 +15,13 @@ on these settings (ie. the data_period variable), so the 0.1T runs can be
 reproduced by dividing this value by 10.
 """
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
+
 from absl import app
 from absl import flags
 
 import training
-
-import logging
-logging.getLogger("tensorflow").setLevel(logging.WARNING)
 
 
 def main(unused_argv):
