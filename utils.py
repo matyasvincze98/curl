@@ -5,10 +5,6 @@ from __future__ import division
 from __future__ import print_function
 
 from absl import logging
-
-import logging
-logging.getLogger("tensorflow").setLevel(logging.WARNING)
-
 import tensorflow as tf
 import tensorflow_probability as tfp
 
