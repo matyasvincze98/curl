@@ -7,10 +7,6 @@ from absl import logging
 import numpy as np
 from sklearn import neighbors
 import sonnet as snt
-
-import logging
-logging.getLogger("tensorflow").setLevel(logging.WARNING)
-
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import tensorflow_probability as tfp
