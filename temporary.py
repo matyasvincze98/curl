@@ -7,6 +7,10 @@ ds_train_, ds_info_ = tfds.load(
       as_dataset_kwargs={'shuffle_files': False},
       **{})
 
+print(type(ds_train_), ds_train_)
+print()
+print(type(ds_info_), ds_info_)
+
 
 '''
 import pickle
