@@ -8,7 +8,7 @@ patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_
 patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images', 'train_labels']}
 print(patches_128k_train_dict)
 patches_128k_train_df = pd.DataFrame.from_dict(patches_128k_train_dict['train_images'])
-print(patches_128k_tain_df.head())
+print(patches_128k_train_df.head())
 
 # patches_128k_tf = tf.data.Dataset.from_tensor_slices(patches_128k_pd)
 
