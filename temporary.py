@@ -6,7 +6,7 @@ import pandas as pd
 
 patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
 patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images', 'train_labels']}
-patches_128k_train_df = pd.DataFrame.from_dict(patches_128k_train_dict['train_images'])
+patches_128k_train_df = pd.DataFrame.from_dict(patches_128k_train_dict)
 patches_128k_train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_df)
 
 ds_numpy = tfds.as_numpy(patches_128k_train_ds)
