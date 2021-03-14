@@ -11,7 +11,19 @@ patches_128k_train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_df
 
 ds_numpy = tfds.as_numpy(patches_128k_train_ds)
 for ex in ds_numpy:
-      print(ex)
+      print(ex, type(ex), len(ex))
+      break
+      
+ds_train, ds_info = tfds.load(
+      name='mnist',
+      split=tfds.Split.TRAIN,
+      with_info=True,
+      as_dataset_kwargs={'shuffle_files': False},
+      **{})
+
+ds_numpy = tfds.as_numpy(ds_train)
+for ex in ds_numpy:
+      print(ex, type(ex), len(ex))
       break
 
 '''
