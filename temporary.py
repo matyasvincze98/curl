@@ -10,7 +10,7 @@ patches_128k_train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_di
 
 ds_numpy = tfds.as_numpy(patches_128k_train_ds)
 for ex in ds_numpy:
-      print(ex, type(ex), len(ex))
+      print(ex['train_images'].shape)
       break
       
 ds_train, ds_info = tfds.load(
@@ -22,7 +22,7 @@ ds_train, ds_info = tfds.load(
 
 ds_numpy = tfds.as_numpy(ds_train)
 for ex in ds_numpy:
-      print(ex, type(ex), len(ex))
+      print(ex['image'].shape)
       break
 
 '''
