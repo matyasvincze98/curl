@@ -1,11 +1,4 @@
-from random import shuffle
-import glob
-import sys
-import cv2
-import numpy as np
-#import skimage.io as io
 import tensorflow as tf
-
 import pickle
 import pandas as pd
 
