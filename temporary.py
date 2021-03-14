@@ -10,7 +10,11 @@ ds_train, ds_info = tfds.load(
       as_dataset_kwargs={'shuffle_files': False},
       **{})
 
-print(ds_train)
+ds_numpy = tfds.as_numpy(ds_train)
+for ex in ds_numpy:
+      print(ex)
+      break
+
 
 
 '''
