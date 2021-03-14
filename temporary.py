@@ -15,14 +15,9 @@ for ex in ds_numpy:
       print(ex)
       break
 
-
+patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
+print(patches_128k_dict.keys())
 
 '''
-patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
-
-print
-
-print(patches_128k_pd.head())
-
 patches_128k_tf = tf.data.Dataset.from_tensor_slices(patches_128k_pd)
 '''
