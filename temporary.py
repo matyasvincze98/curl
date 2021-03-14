@@ -2,10 +2,11 @@ import tensorflow as tf
 import pickle
 import pandas as pd
 
-patches_128k = tf.data.Dataset.from_tensor_slices(
-      pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
-)
-print(type(patches_128k))
+patches_128k_pd = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
+
+print(patches_128k_pd.head())
+
+patches_128k_rl = tf.data.Dataset.from_tensor_slices(patches_128k_pd)
 
 '''
 ds_train_, ds_info_ = tfds.load(
