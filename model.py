@@ -162,6 +162,10 @@ def data_decoder_fn(z,
     output_dist = lambda x: tfp.distributions.Bernoulli(logits=x)
     n_out_factor = 1
     out_shape = list(output_shape)
+  if output_type == 'gaussian':
+    output_dist = lambda x: utils.generate_gaussian(logits=x, sigma_nonlin='softplus', sigma_param='var')
+    n_out_factor = 1
+    out_shape = list(output_shape)
   else:
     raise NotImplementedError
   if len(z.shape) != 2:
