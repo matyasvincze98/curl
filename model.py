@@ -224,6 +224,8 @@ def data_decoder_fn(z,
     logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
+    
+  print(tf.shape(logits))
 
   return output_dist(logits)
 
