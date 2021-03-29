@@ -165,8 +165,16 @@ def data_decoder_fn(z,
   elif output_type == 'gaussian':
     output_dist = lambda x: utils.generate_gaussian(logits=x, sigma_nonlin='softplus', sigma_param='var')
     n_out_factor = 1
-    n_dec = 2 * n_dec
     out_shape = list(output_shape)
+    print()
+    print()
+    print()
+    print()
+    print(out_shape)
+    print()
+    print()
+    print()
+    print()
   else:
     raise NotImplementedError
   if len(z.shape) != 2:
