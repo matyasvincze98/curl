@@ -163,7 +163,7 @@ def data_decoder_fn(z,
     n_out_factor = 1
     out_shape = list(output_shape)
   elif output_type == 'gaussian':
-    output_dist = lambda x: utils.generate_gaussian(logits=x, sigma_nonlin='softplus', sigma_param='var')
+    output_dist = lambda x, y: tfp.distributions.Normal(loc=x, scale=y)
     n_out_factor = 1
     out_shape = list(output_shape)
   else:
@@ -223,6 +223,7 @@ def data_decoder_fn(z,
         activate_final=False)
       logits = mlp_decoding(z)
       logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
+      return output_dist(logits)
     elif output_type == 'gaussian':
       mlp_decoding_mu = snt.nets.MLP(
         name='mlp_latent_decoder_mu',
@@ -234,10 +235,9 @@ def data_decoder_fn(z,
         output_sizes=n_dec + [n_x * n_out_factor],
         activation=tf.nn.relu,
         activate_final=False)
-      logits_mu = mlp_decoding_mu(z)
-      logits_sigma = mlp_decoding_sigma(z)
-      logits = tf.concat([logits_mu, logits_sigma], axis=1)
-      logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
+      mu = tf.reshape(mlp_decoding_mu(z), [-1] + out_shape)
+      sigma = tf.reshape(mlp_decoding_sigma(z), [-1] + out_shape)
+      return output_dist(mu, sigma)
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
     
