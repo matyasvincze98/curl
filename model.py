@@ -241,7 +241,7 @@ def data_decoder_fn(z,
       print()
       print()
       print()
-      print(tf.make_ndarray(output_dist(mu, sigma)))
+      print(output_dist(mu, sigma))
       print()
       print()
       print()
