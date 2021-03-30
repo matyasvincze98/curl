@@ -1,9 +1,23 @@
 import tensorflow as tf
+import tensorflow_probability as tfp
 import tensorflow_datasets as tfds
 import pickle
 import pandas as pd
 
+bernoulli = tfp.distributions.Bernoulli(logits=[0.1, 0.5, 0.9])
+normal = tfp.distributions.Normal(loc=[0.1, 0.5, 0.9], scale=[0.1, 0.5, 0.9])
 
+print(bernoulli(1, 1))
+print(normal(1, 1))
+
+
+
+
+
+
+
+
+'''
 patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
 patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images', 'train_labels']}
 patches_128k_train_dict['train_images'] = patches_128k_train_dict['train_images'].reshape(-1, 48, 48, 1)
@@ -26,7 +40,7 @@ for ex in ds_numpy:
       print(ex['image'].shape)
       break
 
-'''
+
 ds_train, ds_info = tfds.load(
       name='mnist',
       split=tfds.Split.TRAIN,
