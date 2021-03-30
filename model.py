@@ -164,7 +164,7 @@ def data_decoder_fn(z,
     out_shape = list(output_shape)
   elif output_type == 'gaussian':
     output_dist = lambda x: utils.generate_gaussian(logits=x, sigma_nonlin='softplus', sigma_param='var')
-    n_out_factor = 2
+    n_out_factor = 1
     out_shape = list(output_shape)
   else:
     raise NotImplementedError
@@ -221,7 +221,7 @@ def data_decoder_fn(z,
         activation=tf.nn.relu,
         activate_final=False)
     logits = mlp_decoding(z)
-    logits = tf.reshape(logits, [200, 28, 28, 1])  # [-1] + out_shape)  # Back to 4D
+    logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
     
