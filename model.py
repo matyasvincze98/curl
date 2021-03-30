@@ -241,7 +241,7 @@ def data_decoder_fn(z,
       print()
       print()
       print()
-      print(output_dist(mu, sigma).eval())
+      print(output_dist(mu, sigma).numpy())
       print()
       print()
       print()
