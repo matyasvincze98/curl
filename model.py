@@ -225,12 +225,12 @@ def data_decoder_fn(z,
       logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
     elif output_type == 'gaussian':
       mlp_decoding_mu = snt.nets.MLP(
-        name='mlp_latent_decoder',
+        name='mlp_latent_decoder_mu',
         output_sizes=n_dec + [n_x * n_out_factor],
         activation=tf.nn.relu,
         activate_final=False)
       mlp_decoding_sigma = snt.nets.MLP(
-        name='mlp_latent_decoder',
+        name='mlp_latent_decoder_sigma',
         output_sizes=n_dec + [n_x * n_out_factor],
         activation=tf.nn.relu,
         activate_final=False)
