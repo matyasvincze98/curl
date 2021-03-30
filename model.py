@@ -195,6 +195,15 @@ def data_decoder_fn(z,
         method=decoder_type)
     logits = conv_decoder(
         z, is_training=is_training, test_local_stats=test_local_stats)
+    print()
+    print()
+    print()
+    print()
+    print(out_shape)
+    print()
+    print()
+    print()
+    print()
     logits = tf.reshape(logits, [-1] + out_shape)  # n_out_factor in last dim
 
   # Multiple MLP decoders, one for each component.
