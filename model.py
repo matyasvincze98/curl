@@ -237,7 +237,7 @@ def data_decoder_fn(z,
       logits_mu = mlp_decoding_mu(z)
       logits_sigma = mlp_decoding_sigma(z)
       logits = tf.concat([logits_mu, logits_sigma], axis=1)
-      logits = tf.reshape(logits, [200, 28, 28, 1])  # [-1] + out_shape)  # Back to 4D    
+      logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
     
@@ -245,7 +245,7 @@ def data_decoder_fn(z,
   print()
   print()
   print()
-  print()
+  print(logits.shape)
   print()
   print()
   print()
