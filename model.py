@@ -195,15 +195,6 @@ def data_decoder_fn(z,
         method=decoder_type)
     logits = conv_decoder(
         z, is_training=is_training, test_local_stats=test_local_stats)
-    print()
-    print()
-    print()
-    print()
-    print(out_shape)
-    print()
-    print()
-    print()
-    print()
     logits = tf.reshape(logits, [-1] + out_shape)  # n_out_factor in last dim
 
   # Multiple MLP decoders, one for each component.
@@ -233,6 +224,16 @@ def data_decoder_fn(z,
     logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
+    
+  print()
+  print()
+  print()
+  print()
+  print(out_shape, [-1] + out_shape)
+  print()
+  print()
+  print()
+  print()
     
   return output_dist(logits)
 
