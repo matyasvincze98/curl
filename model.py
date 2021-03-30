@@ -184,7 +184,7 @@ def data_decoder_fn(z,
     if shared_encoder_conv_shapes is None:
       raise ValueError('Shared encoder does not contain conv_shapes.')
 
-    num_output_channels = 2  # output_shape[-1]
+    num_output_channels = output_shape[-1]
     conv_decoder = UpsampleModule(
         filters=n_dec,
         kernel_size=3,
@@ -215,13 +215,29 @@ def data_decoder_fn(z,
 
   # Single (shared among components) MLP decoder.
   elif decoder_type == 'single':
-    mlp_decoding = snt.nets.MLP(
+    if output_type == 'bernoulli':
+      mlp_decoding = snt.nets.MLP(
         name='mlp_latent_decoder',
         output_sizes=n_dec + [n_x * n_out_factor],
         activation=tf.nn.relu,
         activate_final=False)
-    logits = mlp_decoding(z)
-    logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
+      logits = mlp_decoding(z)
+      logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
+    elif output_type == 'gaussian':
+      mlp_decoding_mu = snt.nets.MLP(
+        name='mlp_latent_decoder',
+        output_sizes=n_dec + [n_x * n_out_factor],
+        activation=tf.nn.relu,
+        activate_final=False)
+      mlp_decoding_sigma = snt.nets.MLP(
+        name='mlp_latent_decoder',
+        output_sizes=n_dec + [n_x * n_out_factor],
+        activation=tf.nn.relu,
+        activate_final=False)
+      logits_mu = mlp_decoding(z)
+      logits_sigma = mlp_decoding(z)
+      logits = tf.concat([mu, sigma], axis=1)
+      logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D    
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
     
@@ -229,7 +245,7 @@ def data_decoder_fn(z,
   print()
   print()
   print()
-  print(tf.shape(logits))
+  print()
   print()
   print()
   print()
