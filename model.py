@@ -229,7 +229,7 @@ def data_decoder_fn(z,
   print()
   print()
   print()
-  print(out_shape, [-1] + out_shape)
+  print(tf.shape(logits))
   print()
   print()
   print()
