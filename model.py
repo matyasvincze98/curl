@@ -169,7 +169,7 @@ def data_decoder_fn(z,
     print()
     print()
     print()
-    print(output_shape, out_shape)
+    print(output_shape[-1])
     print()
     print()
     print()    
