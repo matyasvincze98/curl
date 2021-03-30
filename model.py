@@ -221,7 +221,7 @@ def data_decoder_fn(z,
         activation=tf.nn.relu,
         activate_final=False)
     logits = mlp_decoding(z)
-    logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
+    logits = tf.reshape(logits, [100, 28, 28, 1])  # [-1] + out_shape)  # Back to 4D
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
     
