@@ -166,13 +166,6 @@ def data_decoder_fn(z,
     output_dist = lambda x: utils.generate_gaussian(logits=x, sigma_nonlin='softplus', sigma_param='var')
     n_out_factor = 2
     out_shape = list(output_shape)
-    print()
-    print()
-    print()
-    print(output_shape[-1])
-    print()
-    print()
-    print()    
   else:
     raise NotImplementedError
   if len(z.shape) != 2:
@@ -191,7 +184,7 @@ def data_decoder_fn(z,
     if shared_encoder_conv_shapes is None:
       raise ValueError('Shared encoder does not contain conv_shapes.')
 
-    num_output_channels = output_shape[-1]
+    num_output_channels = 2  # output_shape[-1]
     conv_decoder = UpsampleModule(
         filters=n_dec,
         kernel_size=3,
