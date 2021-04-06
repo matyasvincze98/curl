@@ -8,6 +8,7 @@ def main(unused_argv):
   training.run_training(
       dataset='mnist',
       output_type='gaussian',
+      variance=0.2,
       n_y=30,
       n_y_active=1,
       training_data_type='sequential',
