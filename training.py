@@ -15,6 +15,8 @@ import tensorflow_probability as tfp
 import model
 import utils
 
+import pickle
+
 tfc = tf.compat.v1
 
 # pylint: disable=g-long-lambda
