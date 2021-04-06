@@ -635,6 +635,7 @@ def run_training(
       model.data_decoder_fn,
       output_type=output_type,
       output_shape=output_shape,
+      variance=variance,
       n_x=n_x,
       n_y=n_y,
       **decoder_kwargs)
