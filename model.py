@@ -164,7 +164,7 @@ def data_decoder_fn(z,
     n_out_factor = 1
     out_shape = list(output_shape)
   elif output_type == 'gaussian':
-    output_dist = lambda x: tfp.distributions.Normal(loc=x, scale=[variance for _ in range(len(x))])
+    output_dist = lambda x: tfp.distributions.Normal(loc=x, scale=variance)
     n_out_factor = 1
     out_shape = list(output_shape)
   else:
