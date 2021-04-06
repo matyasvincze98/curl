@@ -127,6 +127,7 @@ def data_decoder_fn(z,
                     y,
                     output_type,
                     output_shape,
+                    variance,
                     decoder_type,
                     n_dec,
                     dec_up_strides,
@@ -163,7 +164,7 @@ def data_decoder_fn(z,
     n_out_factor = 1
     out_shape = list(output_shape)
   elif output_type == 'gaussian':
-    output_dist = lambda x, y: tfp.distributions.Normal(loc=x, scale=y)
+    output_dist = lambda x: tfp.distributions.Normal(loc=x, scale=[variance for _ in range(len(x))])
     n_out_factor = 1
     out_shape = list(output_shape)
   else:
@@ -215,50 +216,16 @@ def data_decoder_fn(z,
 
   # Single (shared among components) MLP decoder.
   elif decoder_type == 'single':
-    if output_type == 'bernoulli':
-      mlp_decoding = snt.nets.MLP(
-        name='mlp_latent_decoder',
-        output_sizes=n_dec + [n_x * n_out_factor],
-        activation=tf.nn.relu,
-        activate_final=False)
-      logits = mlp_decoding(z)
-      logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
-      return output_dist(logits)
-    elif output_type == 'gaussian':
-      mlp_decoding_mu = snt.nets.MLP(
-        name='mlp_latent_decoder_mu',
-        output_sizes=n_dec + [n_x * n_out_factor],
-        activation=tf.nn.relu,
-        activate_final=False)
-      mlp_decoding_sigma = snt.nets.MLP(
-        name='mlp_latent_decoder_sigma',
-        output_sizes=n_dec + [n_x * n_out_factor],
-        activation=tf.nn.relu,
-        activate_final=False)
-      mu = tf.reshape(mlp_decoding_mu(z), [-1] + out_shape)
-      sigma = tf.reshape(mlp_decoding_sigma(z), [-1] + out_shape)
-      print()
-      print()
-      print()
-      print()
-      print(output_dist(mu, sigma))
-      print()
-      print()
-      print()
-      print()
-      return output_dist(mu, sigma)
+    mlp_decoding = snt.nets.MLP(
+      name='mlp_latent_decoder',
+      output_sizes=n_dec + [n_x * n_out_factor],
+      activation=tf.nn.relu,
+      activate_final=False)
+    logits = mlp_decoding(z)
+    logits = tf.reshape(logits, [-1] + out_shape)  # Back to 4D
+    return output_dist(logits)
   else:
     raise ValueError('Unknown decoder_type {}'.format(decoder_type))
-    
-  print()
-  print()
-  print()
-  print()
-  print(logits.shape)
-  print()
-  print()
-  print()
-  print()
     
   return output_dist(logits)
 
