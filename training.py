@@ -474,6 +474,7 @@ def run_training(
     lr_factor,
     lr_schedule,
     output_type,
+    variance,
     n_y,
     n_y_active,
     n_z,
