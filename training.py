@@ -16,6 +16,7 @@ import model
 import utils
 
 import pickle
+import pandas as pd
 
 tfc = tf.compat.v1
 
