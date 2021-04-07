@@ -113,9 +113,9 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images', 'train_labels']}
   patches_128k_train_dict['train_images'] = patches_128k_train_dict['train_images'].reshape(-1, 48, 48, 1)
   patches_128k_test_dict = {key: patches_128k_dict[key] for key in ['test_images', 'test_labels']}
-  patches_128k_test_dict['test_images'] = patches_128k_train_dict['test_images'].reshape(-1, 48, 48, 1)
+  patches_128k_test_dict['test_images'] = patches_128k_test_dict['test_images'].reshape(-1, 48, 48, 1)
   train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
-  test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
+  test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
     
   n_classes = 5
   num_train_examples = 115200
