@@ -153,7 +153,7 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
 
   return DatasetTuple(train_data, train_iter_for_classifier,
                       train_data_for_classifier, valid_iter, valid_data,
-                      test_iter, test_data, ds_info)
+                      test_iter, test_data)
 
 
 def setup_training_and_eval_graphs(x, label, y, n_y, curl_model,
