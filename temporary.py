@@ -10,16 +10,12 @@ patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images
 patches_128k_train_dict['train_images'] = patches_128k_train_dict['train_images'].reshape(-1, 48, 48, 1)
 patches_128k_train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
       
-'''
 ds_train, ds_info = tfds.load(
       name='mnist',
       split=tfds.Split.TRAIN,
       with_info=True,
       as_dataset_kwargs={'shuffle_files': False},
       **{})
-'''
-
-for item in patches_128k_train_ds
 
 print(patches_128k_train_ds)
 print(ds_train, ds_info)
