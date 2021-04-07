@@ -108,102 +108,46 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   """
 
   # Load training data sources
-  ds_train, ds_info = tfds.load(
-      name=dataset,
-      split=tfds.Split.TRAIN,
-      with_info=True,
-      as_dataset_kwargs={'shuffle_files': False},
-      **dataset_kwargs)
+  patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
+  patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images', 'train_labels']}
+  patches_128k_train_dict['train_images'] = patches_128k_train_dict['train_images'].reshape(-1, 48, 48, 1)
+  patches_128k_test_dict = {key: patches_128k_dict[key] for key in ['test_images', 'test_labels']}
+  patches_128k_test_dict['test_images'] = patches_128k_train_dict['test_images'].reshape(-1, 48, 48, 1)
+  train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
+  test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
+    
+  n_classes = 5
+  num_train_examples = 115200
+  num_test_examples = 12800
 
-  # Validate assumption that data is in [0, 255]
-  assert ds_info.features[image_key].dtype == tf.uint8
-
-  n_classes = ds_info.features[label_key].num_classes
-  num_train_examples = ds_info.splits['train'].num_examples
-
-  def preprocess_data(x):
-    """Convert images from uint8 in [0, 255] to float in [0, 1]."""
-    x[image_key] = tf.image.convert_image_dtype(x[image_key], tf.float32)
-    return x
-
-  if training_data_type == 'sequential':
-    c = None  # The index of the class number, None for now and updated later
-    if n_concurrent_classes == 1:
-      filter_fn = lambda v: tf.equal(v[label_key], c)
-    else:
-      # Define the lowest and highest class number at each data period.
-      assert n_classes % n_concurrent_classes == 0, (
-          'Number of total classes must be divisible by '
-          'number of concurrent classes')
-      cmin = []
-      cmax = []
-      for i in range(int(n_classes / n_concurrent_classes)):
-        for _ in range(n_concurrent_classes):
-          cmin.append(i * n_concurrent_classes)
-          cmax.append((i + 1) * n_concurrent_classes)
-
-      filter_fn = lambda v: tf.logical_and(
-          tf.greater_equal(v[label_key], cmin[c]), tf.less(
-              v[label_key], cmax[c]))
-
-    # Set up data sources/queues (one for each class).
-    train_datasets = []
-    train_iterators = []
-    train_data = []
-
-    full_ds = ds_train.repeat().shuffle(num_train_examples, seed=0)
-    full_ds = full_ds.map(preprocess_data)
-    for c in range(n_classes):
-      filtered_ds = full_ds.filter(filter_fn).batch(
-          batch_size, drop_remainder=True)
-      train_datasets.append(filtered_ds)
-      train_iterators.append(train_datasets[-1].make_one_shot_iterator())
-      train_data.append(train_iterators[-1].get_next())
-
-  else:  # not sequential
-    full_ds = ds_train.repeat().shuffle(num_train_examples, seed=0)
-    full_ds = full_ds.map(preprocess_data)
-    train_datasets = full_ds.batch(batch_size, drop_remainder=True)
-    train_data = train_datasets.make_one_shot_iterator().get_next()
+  c = None  # The index of the class number, None for now and updated later
+  filter_fn = lambda v: tf.equal(v[label_key], c)
+  
+  # Set up data sources/queues (one for each class).
+  train_datasets = []
+  train_iterators = []
+  train_data = []
+  
+  for c in range(n_classes):
+    filtered_ds = train_ds.filter(filter_fn).batch(
+        batch_size, drop_remainder=True)
+    train_datasets.append(filtered_ds)
+    train_iterators.append(train_datasets[-1].make_one_shot_iterator())
+    train_data.append(train_iterators[-1].get_next())
 
   # Set up data source to get full training set for classifier training
-  full_ds = ds_train.repeat(1).shuffle(num_train_examples, seed=0)
-  full_ds = full_ds.map(preprocess_data)
-  train_datasets_for_classifier = full_ds.batch(
+  train_datasets_for_classifier = train_ds.batch(
       test_batch_size, drop_remainder=True)
   train_iter_for_classifier = (
       train_datasets_for_classifier.make_initializable_iterator())
   train_data_for_classifier = train_iter_for_classifier.get_next()
-
-  # Load validation dataset.
-  try:
-    valid_dataset = tfds.load(
-        name=dataset, split=tfds.Split.VALIDATION, **dataset_kwargs)
-    num_valid_examples = ds_info.splits[tfds.Split.VALIDATION].num_examples
-    assert (num_valid_examples %
-            test_batch_size == 0), ('test_batch_size must be a divisor of %d' %
-                                    num_valid_examples)
-    valid_dataset = valid_dataset.repeat(1).batch(
-        test_batch_size, drop_remainder=True)
-    valid_dataset = valid_dataset.map(preprocess_data)
-    valid_iter = valid_dataset.make_initializable_iterator()
-    valid_data = valid_iter.get_next()
-  except (KeyError, ValueError):
-    logging.warning('No validation set!!')
-    valid_iter = None
-    valid_data = None
+    
+  # Handle validation dataset
+  valid_iter = None
+  valid_data = None
 
   # Load test dataset.
-  test_dataset = tfds.load(
-      name=dataset, split=tfds.Split.TEST, **dataset_kwargs)
-  num_test_examples = ds_info.splits['test'].num_examples
-  assert (num_test_examples %
-          test_batch_size == 0), ('test_batch_size must be a divisor of %d' %
-                                  num_test_examples)
-  test_dataset = test_dataset.repeat(1).batch(
-      test_batch_size, drop_remainder=True)
-  test_dataset = test_dataset.map(preprocess_data)
-  test_iter = test_dataset.make_initializable_iterator()
+  test_iter = test_ds.make_initializable_iterator()
   test_data = test_iter.get_next()
   logging.info('Loaded %s data', dataset)
 
