@@ -490,10 +490,10 @@ def run_training(
   valid_data = dataset_ops.valid_data
   test_data = dataset_ops.test_data
 
-  output_shape = dataset_ops.ds_info.features[image_key].shape
+  output_shape = [48, 48, 1]
   n_x = np.prod(output_shape)
-  n_classes = dataset_ops.ds_info.features[label_key].num_classes
-  num_train_examples = dataset_ops.ds_info.splits['train'].num_examples
+  n_classes = 5
+  num_train_examples = 115200
 
   # Check that the number of classes is compatible with the training scenario
   assert n_classes % n_concurrent_classes == 0
