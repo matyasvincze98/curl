@@ -472,8 +472,8 @@ def run_training(
     batch_size = 100
     test_batch_size = 1000
     dataset_kwargs = {}
-    image_key = 'image'
-    label_key = 'label'
+    image_key = 'tain_images'
+    label_key = 'train_labels'
   elif dataset == 'omniglot':
     batch_size = 15
     test_batch_size = 1318
