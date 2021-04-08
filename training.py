@@ -470,20 +470,11 @@ def run_training(
   np.set_printoptions(precision=2, suppress=True)
 
   # First set up the data source(s) and get dataset info.
-  if dataset == 'mnist':
-    batch_size = 100
-    test_batch_size = 1000
-    dataset_kwargs = {}
-    image_key = 'tain_images'
-    label_key = 'train_labels'
-  elif dataset == 'omniglot':
-    batch_size = 15
-    test_batch_size = 1318
-    dataset_kwargs = {}
-    image_key = 'image'
-    label_key = 'alphabet'
-  else:
-    raise NotImplementedError
+  batch_size = 100
+  test_batch_size = 1000
+  dataset_kwargs = {}
+  image_key = 'train_images'
+  label_key = 'train_labels'
 
   dataset_ops = get_data_sources(dataset, dataset_kwargs, batch_size,
                                  test_batch_size, training_data_type,
