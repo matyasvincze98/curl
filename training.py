@@ -122,7 +122,7 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   num_test_examples = 12800
 
   c = None  # The index of the class number, None for now and updated later
-  filter_fn = lambda v: tf.math.equal(v[label_key], c)
+  filter_fn = lambda v: tf.equal(v[label_key], c)
   
   # Set up data sources/queues (one for each class).
   train_datasets = []
