@@ -553,7 +553,7 @@ def run_training(
   x_train_for_clf = train_data_for_clf[image_key]
 
   label_valid = valid_data[label_key] if valid_data else None
-  label_test = test_data[label_key]
+  label_test = test_data['test_labels']
 
   # Set up CURL modules.
   shared_encoder = model.SharedEncoder(name='shared_encoder', **encoder_kwargs)
