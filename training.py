@@ -556,18 +556,10 @@ def run_training(
     """
     return tf.cast(tf.greater(x, 0.5 * tf.ones_like(x)), tf.float32)
 
-  if dataset == 'mnist':
-    x_train = binarize_fn(x_train_raw)
-    x_valid = binarize_fn(valid_data[image_key]) if valid_data else None
-    x_test = binarize_fn(test_data[image_key])
-    x_train_for_clf = binarize_fn(train_data_for_clf[image_key])
-  elif 'cifar' in dataset or dataset == 'omniglot':
-    x_train = x_train_raw
-    x_valid = valid_data[image_key] if valid_data else None
-    x_test = test_data[image_key]
-    x_train_for_clf = train_data_for_clf[image_key]
-  else:
-    raise ValueError('Unknown dataset {}'.format(dataset))
+  x_train = x_train_raw
+  x_valid = valid_data[image_key] if valid_data else None
+  x_test = test_data[image_key]
+  x_train_for_clf = train_data_for_clf[image_key]
 
   label_valid = valid_data[label_key] if valid_data else None
   label_test = test_data[label_key]
