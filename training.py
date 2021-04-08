@@ -493,7 +493,7 @@ def run_training(
   valid_data = dataset_ops.valid_data
   test_data = dataset_ops.test_data
 
-  output_shape = [48, 48, 1]
+  output_shape = (48, 48, 1)
   n_x = np.prod(output_shape)
   n_classes = 5
   num_train_examples = 115200
