@@ -549,7 +549,7 @@ def run_training(
 
   x_train = x_train_raw
   x_valid = valid_data[image_key] if valid_data else None
-  x_test = test_data[image_key]
+  x_test = test_data['test_images']
   x_train_for_clf = train_data_for_clf[image_key]
 
   label_valid = valid_data[label_key] if valid_data else None
