@@ -24,5 +24,5 @@ ds_train, ds_info = tfds.load(
       **{})
 '''
 
-for item in train_ds.as_numpy_iterator():
-      print(item)
+for item in train_ds:
+      print(item.numpy())
