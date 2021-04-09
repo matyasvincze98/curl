@@ -22,10 +22,8 @@ ds_train, ds_info = tfds.load(
       as_dataset_kwargs={'shuffle_files': False},
       **{})
 
-for item in train_ds:
-      print(item.numpy())
-      break
-      
-for item in ds_train:
-      print(item.numpy())
-      break
+q = train_ds.make_one_shot_iterator().get_next()
+qq = train_ds.make_one_shot_iterator().get_next()
+with tf.Session() as sess:
+      print(sess.run(q))
+      print(sess.run(qq))
