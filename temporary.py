@@ -23,7 +23,7 @@ ds_train, ds_info = tfds.load(
       **{})
 
 q = train_ds.make_one_shot_iterator().get_next()
-qq = train_ds.make_one_shot_iterator().get_next()
+qq = ds_train.make_one_shot_iterator().get_next()
 with tf.Session() as sess:
       print(sess.run(q))
       print(sess.run(qq))
