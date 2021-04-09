@@ -15,14 +15,17 @@ patches_128k_test_dict['test_labels'] = patches_128k_test_dict['test_labels'][:1
 train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
 test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
       
-'''
 ds_train, ds_info = tfds.load(
       name='mnist',
       split=tfds.Split.TRAIN,
       with_info=True,
       as_dataset_kwargs={'shuffle_files': False},
       **{})
-'''
 
 for item in train_ds:
       print(item.numpy())
+      break
+      
+for item in ds_train:
+      print(item.numpy())
+      break
