@@ -22,7 +22,7 @@ test_batch_size = 1000
 dataset_kwargs = {}
 image_key = 'image'
 label_key = 'label'
-dataset_ops = get_data_sources('mnist', dataset_kwargs, batch_size,
+dataset_ops = training.get_data_sources('mnist', dataset_kwargs, batch_size,
                                  test_batch_size, 'sequential',
                                  1, image_key, label_key)
 print(dataset_ops)
