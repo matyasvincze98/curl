@@ -122,8 +122,11 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   n_classes = 5
   num_train_examples = len(patches_128k_train_dict['train_labels'])
   num_test_examples = len(patches_128k_test_dict['train_labels'])
+
   c = None  # The index of the class number, None for now and updated later
   filter_fn = lambda v: tf.equal(v[label_key], c)
+
+  train_ds = train_ds.repeat().shuffle(num_train_examples, seed=0)
   
   # Set up data sources/queues (one for each class).
   train_datasets = []
