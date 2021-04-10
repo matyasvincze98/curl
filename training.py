@@ -118,6 +118,16 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   patches_128k_test_dict['test_labels'] = patches_128k_test_dict['test_labels'][:10]
   train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
   test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
+
+  print()
+  print()
+  print()
+  print()
+  print(len(patches_128k_train_dict['train_labels']))
+  print()
+  print()
+  print()
+  print()
     
   n_classes = 5
   num_train_examples = 10  # 115200
