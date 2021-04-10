@@ -150,7 +150,7 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   valid_data = None
 
   # Load test dataset.
-  test_dataset = test_dataset.repeat(1).batch(test_batch_size, drop_remainder=True)
+  test_ds = test_ds.repeat(1).batch(test_batch_size, drop_remainder=True)
   test_iter = test_ds.make_initializable_iterator()
   test_data = test_iter.get_next()
   logging.info('Loaded %s data', dataset)
