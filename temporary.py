@@ -25,7 +25,9 @@ label_key = 'label'
 dataset_ops = training.get_data_sources('mnist', dataset_kwargs, batch_size,
                                  test_batch_size, 'sequential',
                                  1, image_key, label_key)
-print(dataset_ops)
+print(dataset_ops.train_data)
+print(dataset_ops.train_data_for_clf)
+print(dataset_ops.test_data)
 
 '''
 q = train_ds.make_one_shot_iterator().get_next()
