@@ -17,7 +17,7 @@
 
 from absl import logging
 import sonnet as snt
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 
 tfc = tf.compat.v1
 
