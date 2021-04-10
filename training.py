@@ -120,8 +120,8 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
     
   n_classes = 5
-  num_train_examples = 115200
-  num_test_examples = 12800
+  num_train_examples = 10  # 115200
+  num_test_examples = 10  # 12800
 
   c = None  # The index of the class number, None for now and updated later
   filter_fn = lambda v: tf.equal(v[label_key], c)
