@@ -33,7 +33,7 @@ reproduced by dividing this value by 10.
 from absl import app
 from absl import flags
 
-from curl import training
+import training
 
 flags.DEFINE_enum('dataset', 'mnist', ['mnist', 'omniglot'], 'Dataset.')
 
@@ -42,7 +42,7 @@ FLAGS = flags.FLAGS
 
 def main(unused_argv):
   training.run_training(
-      dataset=FLAGS.dataset,
+      dataset='mnist',
       output_type='bernoulli',
       n_y=30,
       n_y_active=1,
@@ -68,10 +68,10 @@ def main(unused_argv):
           'dec_up_strides': None,
       },
       n_z=32,
-      dynamic_expansion=True,
+      dynamic_expansion=False,
       ll_thresh=-200.0,
       classify_with_samples=False,
-      gen_replay_type='fixed',
+      gen_replay_type=None,
       use_supervised_replay=False,
       )
 
