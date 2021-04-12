@@ -90,7 +90,7 @@ def process_dataset(iterator,
 
 def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
                      training_data_type, n_concurrent_classes, image_key,
-                     label_key):
+                     label_key, num_train, num_test):
   """Create and return data sources for training, validation, and testing.
 
   Args:
@@ -111,13 +111,17 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   # Load training data sources
   patches_128k_dict = pd.read_pickle('https://wigner.hu/~fcsikor/textures/labeled_texture_oatleathersoilcarpetbubbles_subsamp1_filtered_128000_48px.pkl')
   patches_128k_train_dict = {key: patches_128k_dict[key] for key in ['train_images', 'train_labels']}
-  patches_128k_train_dict['train_images'] = patches_128k_train_dict['train_images'][:10000].reshape(-1, 48, 48, 1)
-  patches_128k_train_dict['train_labels'] = patches_128k_train_dict['train_labels'][:10000]
+  patches_128k_train_dict['train_images'] = patches_128k_train_dict['train_images'][:num_train].reshape(-1, 48, 48, 1)
+  patches_128k_train_dict['train_labels'] = patches_128k_train_dict['train_labels'][:num_train]
   patches_128k_test_dict = {key: patches_128k_dict[key] for key in ['test_images', 'test_labels']}
-  patches_128k_test_dict['test_images'] = patches_128k_test_dict['test_images'][:1000].reshape(-1, 48, 48, 1)
-  patches_128k_test_dict['test_labels'] = patches_128k_test_dict['test_labels'][:1000]
+  patches_128k_test_dict['test_images'] = patches_128k_test_dict['test_images'][:num_test].reshape(-1, 48, 48, 1)
+  patches_128k_test_dict['test_labels'] = patches_128k_test_dict['test_labels'][:num_test]
   train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
   test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
+
+  del patches_128k_dict
+  del patches_128k_train_dict
+  del patches_128k_test_dict
     
   n_classes = 5
   num_train_examples = len(patches_128k_train_dict['train_labels'])
@@ -438,7 +442,9 @@ def run_training(
     report_interval,
     knn_values,
     gen_replay_type,
-    use_supervised_replay):
+    use_supervised_replay
+    num_train,
+    num_test):
   """Run training script.
 
   Args:
@@ -481,7 +487,7 @@ def run_training(
 
   dataset_ops = get_data_sources(dataset, dataset_kwargs, batch_size,
                                  test_batch_size, training_data_type,
-                                 n_concurrent_classes, image_key, label_key)
+                                 n_concurrent_classes, image_key, label_key, num_train, num_test)
   train_data = dataset_ops.train_data
   train_data_for_clf = dataset_ops.train_data_for_clf
   valid_data = dataset_ops.valid_data
