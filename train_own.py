@@ -29,7 +29,7 @@ def main(unused_argv):
       n_y_active=1,
       training_data_type='sequential',
       n_concurrent_classes=1,
-      lr_init=args..lr_init,
+      lr_init=args.lr_init,
       lr_factor=1.,
       lr_schedule=[1],
       blend_classes=False,
