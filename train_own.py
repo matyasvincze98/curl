@@ -4,7 +4,7 @@ import training
 
 variance = 0.8
 n_y = 30
-lr_init = 1e-3
+lr_init = 1e-2  # 1e-3
 n_steps = 100000  # 100000
 report_interval = 10
 n_enc = [1200, 600, 300, 150]
