@@ -2,7 +2,7 @@ from absl import app
 
 import training
 
-variance = 0.7
+variance = 100
 n_y = 30
 lr_init = 1e-3
 n_steps = 10000  # 100000
@@ -17,7 +17,7 @@ num_test = 5000  # 12800
 def main(unused_argv):
   training.run_training(
       dataset='mnist',
-      output_type='bernoulli',
+      output_type='gaussian',
       variance=variance,
       n_y=n_y,
       n_y_active=1,
