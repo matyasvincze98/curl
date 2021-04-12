@@ -18,7 +18,7 @@ def main(unused_argv):
   training.run_training(
       dataset='mnist',
       output_type='gaussian',
-      variance=args.variance,
+      variance=variance,
       n_y=n_y,
       n_y_active=1,
       training_data_type='sequential',
@@ -29,7 +29,7 @@ def main(unused_argv):
       blend_classes=False,
       train_supervised=False,
       n_steps=n_steps,
-      report_interval=args.report_interval,
+      report_interval=report_interval,
       knn_values=[10],
       random_seed=1,
       encoder_kwargs={
