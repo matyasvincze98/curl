@@ -118,14 +118,14 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   patches_128k_test_dict['test_labels'] = patches_128k_test_dict['test_labels'][:num_test]
   train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
   test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
-
-  del patches_128k_dict
-  del patches_128k_train_dict
-  del patches_128k_test_dict
     
   n_classes = 5
   num_train_examples = len(patches_128k_train_dict['train_labels'])
   num_test_examples = len(patches_128k_test_dict['test_labels'])
+
+  del patches_128k_dict
+  del patches_128k_train_dict
+  del patches_128k_test_dict
 
   c = None  # The index of the class number, None for now and updated later
   filter_fn = lambda v: tf.equal(v[label_key], c)
