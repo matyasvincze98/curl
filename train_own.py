@@ -1,5 +1,4 @@
 from absl import app
-from absl import flags
 
 import argparse
 import os
