@@ -15,6 +15,8 @@ parser.add_argument("--report_interval", default=10000, type=int)
 parser.add_argument("--n_enc", default=[1200, 600, 300, 150], type=list)
 parser.add_argument("--n_dec", default=[500, 500], type=list)
 parser.add_argument("--n_z", default=32, type=int)
+parser.add_argument("--num_train", default=115200, type=int)
+parser.add_argument("--num_test", default=12800, type=int)
 args = parser.parse_args([] if "__file__" not in globals() else None)
 
 
@@ -52,6 +54,8 @@ def main(unused_argv):
       classify_with_samples=False,
       gen_replay_type=None,
       use_supervised_replay=False,
+      num_train=args.num_train,
+      num_test=args.num_test,
       )
 
 if __name__ == '__main__':
