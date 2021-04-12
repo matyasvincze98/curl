@@ -442,7 +442,7 @@ def run_training(
     report_interval,
     knn_values,
     gen_replay_type,
-    use_supervised_replay
+    use_supervised_replay,
     num_train,
     num_test):
   """Run training script.
