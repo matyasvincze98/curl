@@ -1,8 +1,5 @@
 from absl import app
 
-import argparse
-import os
-
 import training
 
 variance = 0.2
