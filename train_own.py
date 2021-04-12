@@ -2,7 +2,7 @@ from absl import app
 
 import training
 
-variance = 2
+variance = 0.8
 n_y = 30
 lr_init = 1e-3
 n_steps = 10000  # 100000
