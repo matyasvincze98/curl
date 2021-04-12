@@ -2,10 +2,10 @@ from absl import app
 
 import training
 
-variance = 100
+variance = 0.8
 n_y = 30
 lr_init = 1e-3
-n_steps = 10000  # 100000
+n_steps = 100000  # 100000
 report_interval = 10
 n_enc = [1200, 600, 300, 150]
 n_dec = [500, 500]
