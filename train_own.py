@@ -10,8 +10,8 @@ report_interval = 10
 n_enc = [1200, 600, 300, 150]
 n_dec = [500, 500]
 n_z = 32
-num_train = 1000  # 115200
-num_test = 100  # 12800
+num_train = 100000  # 115200
+num_test = 10000  # 12800
 
 
 def main(unused_argv):
