@@ -6,12 +6,12 @@ variance = 0.2
 n_y = 30
 lr_init = 1e-3
 n_steps = 100  # 100000
-report_interval = 10000
+report_interval = 10
 n_enc = [1200, 600, 300, 150]
 n_dec = [500, 500]
 n_z = 32
-num_train = 10000  # 115200
-num_test = 1000  # 12800
+num_train = 1000  # 115200
+num_test = 100  # 12800
 
 
 def main(unused_argv):
