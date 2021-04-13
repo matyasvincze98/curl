@@ -707,8 +707,8 @@ def run_training(
         name='extra_train_classes').sample()
 
     gen_samples = model_train.sample(y=y_gen, mean=True)
-    if dataset == 'mnist' or dataset == 'omniglot':
-      gen_samples = binarize_fn(gen_samples)
+    # if dataset == 'mnist' or dataset == 'omniglot':
+    gen_samples = binarize_fn(gen_samples)
 
   # Set up ops to dynamically modify parameters (for dynamic expansion)
   dynamic_ops = setup_dynamic_ops(n_y)
