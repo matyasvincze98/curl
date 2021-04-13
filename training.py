@@ -209,6 +209,22 @@ def setup_training_and_eval_graphs(x, label, y, n_y, curl_model,
 
   confusion = tf.confusion_matrix(label, tf.argmax(cat_probs, axis=1),
                                   num_classes=n_y, name=name + '_confusion')
+
+
+
+
+
+
+
+  print(confusion)
+
+    
+    
+    
+    
+    
+    
+    
   purity = (tf.reduce_sum(tf.reduce_max(confusion, axis=0))
             / tf.reduce_sum(confusion))
 
