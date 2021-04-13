@@ -5,13 +5,13 @@ import training
 variance = 0.8
 n_y = 30
 lr_init = 1e-3  # 1e-3
-n_steps = 100000  # 100000
+n_steps = 100  # 100000
 report_interval = 10
 n_enc = [1200, 600, 300, 150]
 n_dec = [500, 500]
 n_z = 32
-num_train = 50000  # 115200
-num_test = 5000  # 12800
+num_train = 50  # 115200
+num_test = 5  # 12800
 
 
 def main(unused_argv):
