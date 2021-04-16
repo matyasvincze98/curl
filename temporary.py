@@ -21,6 +21,8 @@ ds_train, ds_info = tfds.load(
       as_dataset_kwargs={'shuffle_files': False},
       **{})
       
+print(patches_128k_test_dict['test_labels'])      
+      
 '''
 import training
 batch_size = 100
