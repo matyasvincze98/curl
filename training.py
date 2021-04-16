@@ -84,6 +84,8 @@ def process_dataset(iterator,
       out_results[key] = aggregation_ops[key](value)
     if processing_ops[key]:
       out_results[key] = processing_ops[key](out_results[key], axis=0)
+    
+  print(out_results)
 
   return out_results
 
