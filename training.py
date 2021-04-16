@@ -132,25 +132,6 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
   train_datasets = train_ds.batch(batch_size, drop_remainder=True)
   train_data = train_datasets.make_one_shot_iterator().get_next()
 
-  '''
-  c = None  # The index of the class number, None for now and updated later
-  filter_fn = lambda v: tf.equal(v[label_key], c)
-
-  train_ds = train_ds.repeat().shuffle(num_train_examples, seed=0)
-  
-  # Set up data sources/queues (one for each class).
-  train_datasets = []
-  train_iterators = []
-  train_data = []
-  
-  for c in range(n_classes):
-    filtered_ds = train_ds.filter(filter_fn).batch(
-        batch_size, drop_remainder=True)
-    train_datasets.append(filtered_ds)
-    train_iterators.append(train_datasets[-1].make_one_shot_iterator())
-    train_data.append(train_iterators[-1].get_next())
-  '''
-
   # Set up data source to get full training set for classifier training
   train_datasets_for_classifier = train_ds.batch(
       test_batch_size, drop_remainder=True)
