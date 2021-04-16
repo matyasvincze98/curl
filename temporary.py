@@ -17,8 +17,6 @@ print(dataset_ops.train_data)
 print(dataset_ops.train_data_for_clf)
 print(dataset_ops.test_data)
 
-q = dataset_ops.test_data['test_images'].make_one_shot_iterator().get_next()
-qq = dataset_ops.test_data['test_labels'].make_one_shot_iterator().get_next()
 with tf.Session() as sess:
-      print(sess.run(q))
-      print(sess.run(qq))
+      print(sess.run(dataset_ops.test_data['test_images']))
+      print(sess.run(dataset_ops.test_data['test_labels']))
