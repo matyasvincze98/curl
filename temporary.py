@@ -15,7 +15,7 @@ train_ds = tf.data.Dataset.from_tensor_slices(patches_128k_train_dict)
 test_ds = tf.data.Dataset.from_tensor_slices(patches_128k_test_dict)
 
 ds_train, ds_info = tfds.load(
-      name=dataset,
+      name='mnist',
       split=tfds.Split.TRAIN,
       with_info=True,
       as_dataset_kwargs={'shuffle_files': False},
