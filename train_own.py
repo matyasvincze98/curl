@@ -20,7 +20,7 @@ def main(unused_argv):
       output_type='bernoulli',  # gaussian / bernoulli
       variance=variance,
       n_y=n_y,
-      n_y_active=5,
+      n_y_active=5,  # 1
       training_data_type='sequential',
       n_concurrent_classes=1,
       lr_init=lr_init,
@@ -30,7 +30,7 @@ def main(unused_argv):
       train_supervised=False,
       n_steps=n_steps,
       report_interval=report_interval,
-      knn_values=[10],
+      knn_values=[],  # [10]
       random_seed=1,
       encoder_kwargs={
           'encoder_type': 'multi',
@@ -44,7 +44,7 @@ def main(unused_argv):
       },
       n_z=n_z,
       dynamic_expansion=False,
-      ll_thresh=-200.0,
+      ll_thresh=-200000.0,
       classify_with_samples=False,
       gen_replay_type=None,
       use_supervised_replay=False,
