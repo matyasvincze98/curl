@@ -21,7 +21,7 @@ def main(unused_argv):
       variance=variance,
       n_y=n_y,
       n_y_active=5,  # 1
-      training_data_type='sequential',
+      training_data_type='iid',
       n_concurrent_classes=1,
       lr_init=lr_init,
       lr_factor=1.,
