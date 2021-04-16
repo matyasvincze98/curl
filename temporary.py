@@ -19,7 +19,7 @@ ds_train, ds_info = tfds.load(
       split=tfds.Split.TRAIN,
       with_info=True,
       as_dataset_kwargs={'shuffle_files': False},
-      **dataset_kwargs)
+      **{})
       
 '''
 import training
