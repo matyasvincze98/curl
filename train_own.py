@@ -6,7 +6,7 @@ variance = 0.8
 n_y = 30
 lr_init = 1e-3  # 1e-3
 n_steps = 100  # 100000
-report_interval = 10
+report_interval = 1
 n_enc = [1200, 600, 300, 150]
 n_dec = [500, 500]
 n_z = 32
@@ -20,7 +20,7 @@ def main(unused_argv):
       output_type='bernoulli',  # gaussian / bernoulli
       variance=variance,
       n_y=n_y,
-      n_y_active=1,
+      n_y_active=5,
       training_data_type='sequential',
       n_concurrent_classes=1,
       lr_init=lr_init,
