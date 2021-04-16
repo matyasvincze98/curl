@@ -20,10 +20,7 @@ ds_train, ds_info = tfds.load(
       with_info=True,
       as_dataset_kwargs={'shuffle_files': False},
       **{})
-      
-print([int(item) for item in patches_128k_test_dict['test_labels']])
-      
-'''
+     
 import training
 batch_size = 100
 test_batch_size = 1000
@@ -31,12 +28,11 @@ dataset_kwargs = {}
 image_key = 'train_images'
 label_key = 'train_labels'
 dataset_ops = training.get_data_sources('mnist', dataset_kwargs, batch_size,
-                                 test_batch_size, 'sequential',
+                                 test_batch_size, 'iid',
                                  1, image_key, label_key)
 print(dataset_ops.train_data)
 print(dataset_ops.train_data_for_clf)
 print(dataset_ops.test_data)
-'''
 
 q = train_ds.make_one_shot_iterator().get_next()
 qq = ds_train.make_one_shot_iterator().get_next()
