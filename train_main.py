@@ -53,8 +53,8 @@ def main(unused_argv):
       lr_schedule=[1],
       blend_classes=False,
       train_supervised=False,
-      n_steps=10, #00000,
-      report_interval=1, #0000,
+      n_steps=100000,
+      report_interval=10000,
       knn_values=[10],
       random_seed=1,
       encoder_kwargs={
