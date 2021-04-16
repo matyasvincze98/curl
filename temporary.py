@@ -21,7 +21,7 @@ ds_train, ds_info = tfds.load(
       as_dataset_kwargs={'shuffle_files': False},
       **{})
       
-print(map(int, patches_128k_test_dict['test_labels']))
+print([int(item) for item in patches_128k_test_dict['test_labels']])
       
 '''
 import training
