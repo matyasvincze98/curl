@@ -27,7 +27,7 @@ def main(unused_argv):
       output_type='bernoulli',
       n_y=30,
       n_y_active=1,
-      training_data_type='sequential',
+      training_data_type='iid',
       n_concurrent_classes=1,
       lr_init=1e-3,
       lr_factor=1.,
