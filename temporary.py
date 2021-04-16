@@ -29,7 +29,7 @@ image_key = 'train_images'
 label_key = 'train_labels'
 dataset_ops = training.get_data_sources('mnist', dataset_kwargs, batch_size,
                                  test_batch_size, 'iid',
-                                 1, image_key, label_key)
+                                 1, image_key, label_key, 100, 10)
 print(dataset_ops.train_data)
 print(dataset_ops.train_data_for_clf)
 print(dataset_ops.test_data)
