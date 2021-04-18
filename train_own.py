@@ -17,7 +17,7 @@ num_test = 500  # 12800
 def main(unused_argv):
     training.run_training(
         dataset='mnist',
-        output_type='gauss',  # gaussian / bernoulli
+        output_type='gaussian',  # gaussian / bernoulli
         variance=variance,
         n_y=n_y,
         n_y_active=5,  # 1
