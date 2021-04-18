@@ -2,13 +2,13 @@ from absl import app
 
 import training
 
-variance = 5
+variance = 2
 n_y = 30
-lr_init = 1e-4  # 1e-3
+lr_init = 1e-3  # 1e-3
 n_steps = 1000000  # 100000
 report_interval = 5000000000
-n_enc = [1200, 600, 300, 150]  # [1200, 600, 300, 150]
-n_dec = [500, 500]  # [500, 500]
+n_enc = [600, 300, 150, 75]  # [1200, 600, 300, 150]
+n_dec = [250, 250]  # [500, 500]
 n_z = 32
 num_train = 60000  # 115200
 num_test = 500  # 12800
