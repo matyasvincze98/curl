@@ -172,7 +172,7 @@ def get_data_sources(dataset, dataset_kwargs, batch_size, test_batch_size,
 
 
 def setup_training_and_eval_graphs(x, label, y, n_y, curl_model,
-                                   classify_with_samples, is_training, name):
+                                   classify_with_samples, is_training, name, beta):
     """Set up the graph and return ops for training or evaluation.
 
     Args:
@@ -193,6 +193,7 @@ def setup_training_and_eval_graphs(x, label, y, n_y, curl_model,
     (log_p_x, kl_y, kl_z, log_p_x_supervised, kl_y_supervised,
      kl_z_supervised) = curl_model.log_prob_elbo_components(x, y)
 
+    kl_y, kl_z = beta * kl_y, beta * kl_z
     ll = log_p_x - kl_y - kl_z
     elbo = -tf.reduce_mean(ll)
 
@@ -452,7 +453,8 @@ def run_training(
         gen_replay_type,
         use_supervised_replay,
         num_train,
-        num_test):
+        num_test,
+        beta):
     """Run training script.
 
     Args:
@@ -641,7 +643,8 @@ def run_training(
         model_train,
         classify_with_samples,
         is_training=True,
-        name='train')
+        name='train',
+        beta=beta)
 
     hiddens_for_clf = model_eval.get_shared_rep(x_train_for_clf,
                                                 is_training=False)
@@ -675,7 +678,8 @@ def run_training(
         model_eval,
         classify_with_samples,
         is_training=False,
-        name='test')
+        name='test',
+        beta=beta)
 
     # Set up optimizer (with scheduler).
     global_step = tf.train.get_or_create_global_step()
@@ -1134,3 +1138,5 @@ def run_training(
                         '%.3f, Test: %.3f', step, nval,
                         results['train_' + str(nval) + 'nn_acc'],
                         results['test_' + str(nval) + 'nn_acc'])
+    """with open('test.pickle', 'wb') as f:
+        pickle.dump(model_train, f)"""
