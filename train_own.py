@@ -4,11 +4,11 @@ import training
 
 variance = 0.8
 n_y = 30
-lr_init = 1e-1  # 1e-3
+lr_init = 1e-2  # 1e-3
 n_steps = 100000  # 100000
 report_interval = 5000000000
-n_enc = [1200, 600, 300, 150]
-n_dec = [500, 500]
+n_enc = [120, 60, 30, 15]  # [1200, 600, 300, 150]
+n_dec = [50, 50]  # [500, 500]
 n_z = 32
 num_train = 50000  # 115200
 num_test = 5  # 12800
