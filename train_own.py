@@ -12,7 +12,7 @@ n_dec = [1500, 1500]  # [500, 500]
 n_z = 32
 num_train = 50000  # 115200
 num_test = 10  # 12800
-beta = 10  # 1
+beta = 50  # 1
 batch_size = 10  # 100
 
 
