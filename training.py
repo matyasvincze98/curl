@@ -454,7 +454,8 @@ def run_training(
         use_supervised_replay,
         num_train,
         num_test,
-        beta):
+        beta,
+        batch_size):
     """Run training script.
 
     Args:
@@ -489,7 +490,7 @@ def run_training(
     np.set_printoptions(precision=2, suppress=True)
 
     # First set up the data source(s) and get dataset info.
-    batch_size = 100
+    batch_size = batch_size
     test_batch_size = 1000
     dataset_kwargs = {}
     image_key = 'train_images'
@@ -506,7 +507,7 @@ def run_training(
     output_shape = (48, 48, 1)
     n_x = np.prod(output_shape)
     n_classes = 5
-    num_train_examples = 115200
+    num_train_examples = num_train
 
     # Check that the number of classes is compatible with the training scenario
     assert n_classes % n_concurrent_classes == 0
@@ -803,9 +804,8 @@ def run_training(
         })
         default_train_step = train_step
         to_log += ['train_ELBO', 'train_kl_y', 'train_kl_z']
-
+    saver = tf.train.Saver()
     with tf.train.SingularMonitoredSession() as sess:
-
         for step in range(n_steps):
             feed_dict = {}
 
@@ -1138,5 +1138,10 @@ def run_training(
                         '%.3f, Test: %.3f', step, nval,
                         results['train_' + str(nval) + 'nn_acc'],
                         results['test_' + str(nval) + 'nn_acc'])
-    """with open('test.pickle', 'wb') as f:
-        pickle.dump(model_train, f)"""
+            '''print(step, n_steps)
+            if step == n_steps:
+                print('0')
+                print(saver.save(sess.raw_session(),
+                                 './curl',
+                                 global_step=n_steps,
+                                 write_meta_graph=False))'''
