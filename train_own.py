@@ -4,15 +4,16 @@ import training
 
 variance = 0.8
 n_y = 30
-lr_init = 1e-2  # 1e-3
-n_steps = 10000000  # 100000
+lr_init = 1e-3  # 1e-3
+n_steps = 100000  # 100000
 report_interval = 5000000000
-n_enc = [1200, 600, 300, 150]  # [1200, 600, 300, 150]
-n_dec = [500, 500]  # [500, 500]
+n_enc = [1200, 600, 300, 150]
+n_dec = [500, 500]
 n_z = 32
-num_train = 50000  # 115200
-num_test = 5  # 12800
-beta = 10  # 1
+num_train = 5000  # 115200
+num_test = 10  # 12800
+beta = 2  # 1
+batch_size = 10  # 100
 
 
 def main(unused_argv):
@@ -51,7 +52,8 @@ def main(unused_argv):
         use_supervised_replay=False,
         num_train=num_train,
         num_test=num_test,
-        beta=beta
+        beta=beta,
+        batch_size=batch_size
     )
 
 
